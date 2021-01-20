@@ -21,7 +21,7 @@ void loop() {
   SerialUSB.println("Address of reversed flash sector buffer object: 0x" + String((uint32_t)&reserved_flash_sector, HEX));
   SerialUSB.println("Length of reversed flash sector buffer object: " + String(sizeof(reserved_flash_sector)));
   SerialUSB.println("_reserved_flash_start: 0x" + String((uint32_t)&_reserved_flash_start, HEX));
-  SerialUSB.println("_reserved_flash_start: 0x" + String((uint32_t)&_reserved_flash_end, HEX));
+  SerialUSB.println("_reserved_flash_end: 0x" + String((uint32_t)&_reserved_flash_end, HEX));
   digitalWrite(PC13, HIGH);
   delay(1000);
   digitalWrite(PC13, LOW);

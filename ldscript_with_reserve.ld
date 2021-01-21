@@ -56,15 +56,14 @@ _estack = 0x20000000 + LD_MAX_DATA_SIZE;    /* end of RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
 _Min_Stack_Size = 0x400; /* required amount of stack */
 
-/* ONLY TRUE FOR THIS STM32F401CE CHIP!! */
-_ISR_VECTOR_SIZE = 408;
+/* length of the first and second sector of flash */
 _RESERVED_SECTOR_SIZE = 16384;
 /* Specify the memory areas */
 MEMORY
 {
-ISR_VECTOR_SPACE (rx): ORIGIN = 0x8000000, LENGTH = _ISR_VECTOR_SIZE
+ISR_VECTOR_SPACE (rx): ORIGIN = 0x8000000, LENGTH = _RESERVED_SECTOR_SIZE /* technically occupies the entire first flash sector (16kByte) */
 RESERVED_FLASH_SECTOR (rx): ORIGIN = 0x8004000, LENGTH = _RESERVED_SECTOR_SIZE
-FLASH (rx)      : ORIGIN = 0x8000000 + _ISR_VECTOR_SIZE + _RESERVED_SECTOR_SIZE + LD_FLASH_OFFSET, LENGTH = LD_MAX_SIZE - _ISR_VECTOR_SIZE - LD_FLASH_OFFSET - _RESERVED_SECTOR_SIZE
+FLASH (rx)      : ORIGIN = 0x8004000 + _RESERVED_SECTOR_SIZE, LENGTH = LD_MAX_SIZE - 2*_RESERVED_SECTOR_SIZE
 RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = LD_MAX_DATA_SIZE
 }
 
